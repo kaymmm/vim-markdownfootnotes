@@ -1,28 +1,30 @@
-## VimFootnotes for Markdown
+## VimFootnotes for Markdown with automatic footnote counter
 
-This fork is a slight tweak of the venerable [vimfootnotes][], for use
-with extended markdown.
+This fork derived from [this vim-plugin by David Sanson][1], which in turn is
+a slight tweak of the venerable [vimfootnotes][2], for use with extended
+markdown.
 
-The original script inserts footnotes that look like this:
-
-~~~
-Here is some text.[1]
-
-[1] Here is a note.
-~~~
-
-The new script inserts footnotes in the widely supported extended
-markdown syntax,
+The new script inserts footnotes in the widely supported extended markdown
+syntax with the addition of `fn` as a prefix to the current footnote number.
 
 ~~~
-Here is some text.[^1]
+Here is some text.[^fn1]
 
-[^1]: Here is a note.
+[^fn1]: Here is a note.
 ~~~
 
-The original script inserts footnotes at the end of the file **or**
-before an email sig line, if any. The new script inserts all footnotes at the
-end of the file.
+The footnote number gets determined by an automatic counter whenever a new
+footnote gets inserted. This renders the commands `FootnoteNumber`,
+`FootnoteNumberRestore` and `FootnoteUndo` essentially useless...
+
+The counter works with the default arabic numerals and all other settings
+provided by `b:vimfootnotetype`.
+
+I did not write the counter myself. I found the code for the counting of HTML
+footnotes in [this post by Nick Coleman][3], adjusted it slightly to work with
+Markdown footnotes and cobbled it into the original plugin from David Sanson.
+
+All praise belong to these two fine gentlemen, all errors are mine.
 
 The script defines two mappings, 
 
@@ -37,13 +39,13 @@ of the file. A new buffer will open in a split window at the bottom of
 your screen, ready to edit the new footnote. When you are done, type
 `<Leader>r` to close the split and return to the main text.
 
-![Screenshot](https://raw.github.com/vim-pandoc/vim-markdownfootnotes/master/footnotes.png)
+![Screenshot][5]
 
 ## Installation
 
 Drop `markdownfootnotes.vim` in your plugin directory. 
 
-Or use [Pathogen](https://github.com/tpope/vim-pathogen).
+Or use [Pathogen][6].
 
 ## Settings
 
@@ -91,13 +93,9 @@ previous type, then the counter will not be restarted.
 `FootnoteRestore`
   : Restore previous footnote type and counter.
 
-## Todo
 
-1.  It would not be hard to add support for other plaintext footnote
-    formats, triggered by filetype.
-2.  I have not really looked very carefully at how the script is
-    implemented. I suspect there are ways in which it could be
-    refactored and streamlined.
-
-
- [vimfootnotes]: http://www.vim.org/scripts/script.php?script_id=431
+[1]: https://github.com/vim-pandoc/vim-markdownfootnotes/
+[2]: http://www.vim.org/scripts/script.php?script_id=431
+[3]: http://www.nickcoleman.org/blog/index.cgi?post=footnotevim%21201102211201%21programming
+[5]: https://raw.github.com/vim-pandoc/vim-markdownfootnotes/master/footnotes.png
+[6]: https://github.com/tpope/vim-pathogen
