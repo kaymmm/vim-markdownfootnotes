@@ -1,17 +1,19 @@
 ## VimFootnotes for Markdown with automatic footnote counter
 
-This fork derived from [this vim-plugin by David Sanson][1], which in turn is
+This fork is derived from a combination of [this fork][8] and 
+[this pull request][7] of the [vim-pandoc vim-markdownfootnotes][1], which in turn is
 a slight tweak of the venerable [vimfootnotes][2], for use with extended
 markdown.
 
-The new script inserts footnotes in the widely supported extended markdown
-syntax with the addition of `fn` as a prefix to the current footnote number.
+Unlike derdennis's fork, this version doesn't use the `fn` notation, but keeps the restore
+functionality. It also changes the `<leader>f` insert mode mapping
+to `[]` to avoid annoying typing delays and accidental insertions of footnotes.
+Finally, it gets rid of the keyboard mappings to return from a footnote
+since it's easy enough to `:q` out of the minibuffer.
 
-~~~
-Here is some text.[^fn1]
+The remainder of this README is copied from derdennis's fork.
 
-[^fn1]: Here is a note.
-~~~
+=====
 
 The footnote number gets determined by an automatic counter whenever a new
 footnote gets inserted. This renders the commands `FootnoteNumber`,
@@ -79,7 +81,7 @@ These are mapped to `<Leader>f` and `<Leader>r` respectively.
     :FootnoteNumber 5	
 
 `FootnoteNumberRestore`
- :  Restore old footnote number  
+ :  Restore old footnote number
 
 `FootnoteUndo`
  :  Decrease footnote counter by 1
@@ -103,3 +105,5 @@ previous type, then the counter will not be restarted.
 [4]: https://raw.github.com/derdennis/vim-markdownfootnotes/master/footnotes.png
 [5]: http://slipsum.com/
 [6]: https://github.com/tpope/vim-pathogen
+[7]: https://github.com/Konfekt/vim-markdownfootnotes/commit/58a2ebd2d2f3826fa6c7effa91c09d11d1efdd94
+[8]: https://github.com/derdennis/vim-markdownfootnotes
